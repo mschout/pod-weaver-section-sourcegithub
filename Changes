@@ -1,4 +1,6 @@
 Revision history for Pod::Weaver::Section::SourceGitHub
 
 {{$NEXT}}
+
+0.51  2010-03-30
     - initial release

@@ -19,8 +19,11 @@ sub weave_section {
 
     my $zilla = $input->{zilla} or return;
 
+    my $meta = eval { $zilla->distmeta }
+        or die "no distmeta data present";
+
     # pull repo out of distmeta resources.
-    my $repo = eval { $input->{zilla}{distmeta}{resources}{repository} }
+    my $repo = $meta->{resources}{repository}
         or die "repository not present in distmeta";
 
     return unless $repo =~ /github\.com/;

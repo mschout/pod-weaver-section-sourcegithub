@@ -23,8 +23,7 @@ sub weave_section {
         or die "no distmeta data present";
 
     # pull repo out of distmeta resources.
-    my $repo = $meta->{resources}{repository}
-        or die "repository not present in distmeta";
+    my $repo = $meta->{resources}{repository} or return;
 
     return unless $repo =~ /github\.com/;
 

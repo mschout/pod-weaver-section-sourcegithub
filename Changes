@@ -2,6 +2,9 @@ Revision history for Pod::Weaver::Section::SourceGitHub
 
 {{$NEXT}}
 
+0.53  2010-05-06
+    - do not crash dzil if repo is not a github repo
+
 0.52  2010-03-30
     - use Dist::Zilla's distmeta accessor (requires Dist::Zilla 1.092680)
 

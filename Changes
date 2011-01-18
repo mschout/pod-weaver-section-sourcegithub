@@ -1,6 +1,7 @@
 Revision history for Pod::Weaver::Section::SourceGitHub
 
 {{$NEXT}}
+    - require Dist::Zilla 4.101800: Prereq -> Prereqs
 
 0.53  2010-05-06
     - do not crash dzil if repo is not a github repo

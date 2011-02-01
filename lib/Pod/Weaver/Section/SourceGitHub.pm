@@ -1,4 +1,7 @@
 package Pod::Weaver::Section::SourceGitHub;
+BEGIN {
+  $Pod::Weaver::Section::SourceGitHub::VERSION = '0.54';
+}
 
 # ABSTRACT: Add SOURCE pod section for a github repository
 
@@ -24,11 +27,6 @@ has repo_web => (
     is         => 'ro',
     lazy_build => 1);
 
-=method weave_section
-
-adds the C<SOURCE> section.
-
-=cut
 
 sub weave_section {
     my ($self, $document, $input) = @_;
@@ -96,7 +94,17 @@ sub _build_repo_web {
 no Moose;
 1;
 
-__END__
+
+
+=pod
+
+=head1 NAME
+
+Pod::Weaver::Section::SourceGitHub - Add SOURCE pod section for a github repository
+
+=head1 VERSION
+
+version 0.54
 
 =head1 SYNOPSIS
 
@@ -108,4 +116,36 @@ in C<weaver.ini>:
 
 This section plugin will produce a hunk of Pod that gives the github URL for
 your module, as well as instructions on how to clone the repository.
+
+=head1 METHODS
+
+=head2 weave_section
+
+adds the C<SOURCE> section.
+
+=head1 SOURCE
+
+The development version is on github at L<http://github.com/mschout/pod-weaver-section-sourcegithub>
+and may be cloned from L<git://github.com/mschout/pod-weaver-section-sourcegithub.git>
+
+=head1 BUGS
+
+Please report any bugs or feature requests to bug-pod-weaver-section-sourcegithub@rt.cpan.org or through the web interface at:
+ http://rt.cpan.org/Public/Dist/Display.html?Name=Pod-Weaver-Section-SourceGitHub
+
+=head1 AUTHOR
+
+  Michael Schout <mschout@cpan.org>
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2011 by Michael Schout.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+=cut
+
+
+__END__
 

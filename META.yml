@@ -26,5 +26,5 @@ resources:
   bugtracker: http://rt.cpan.org/Public/Dist/Display.html?Name=Pod-Weaver-Section-SourceGitHub
   homepage: http://search.cpan.org/dist/Pod-Weaver-Section-SourceGitHub/
   repository: git://github.com/mschout/pod-weaver-section-sourcegithub.git
-version: '0.55'
+version: '0.56'
 x_serialization_backend: 'YAML::Tiny version 1.69'

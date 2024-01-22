@@ -1,6 +1,7 @@
 Revision history for Pod::Weaver::Section::SourceGitHub
 
 {{$NEXT}}
+    - Fix extra https:// in front of repo urls
 
 0.56  2017-07-31
     - add MANIFEST.SKIP

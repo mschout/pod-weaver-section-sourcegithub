@@ -4,7 +4,7 @@ Pod::Weaver::Section::SourceGitHub - Add SOURCE pod section for a github reposit
 
 # VERSION
 
-version 0.57
+version 0.58
 
 # SYNOPSIS
 
@@ -43,7 +43,7 @@ Michael Schout <mschout@cpan.org>
 
 # COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2024 by Michael Schout.
+This software is copyright (c) 2025 by Michael Schout.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

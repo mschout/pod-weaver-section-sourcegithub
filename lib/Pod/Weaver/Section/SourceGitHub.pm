@@ -24,6 +24,11 @@ has repo_web => (
     is         => 'ro',
     lazy_build => 1);
 
+has header => (
+  is      => 'ro',
+  isa     => 'Str',
+  default => 'SOURCE',
+);
 
 sub weave_section {
     my ($self, $document, $input) = @_;
@@ -52,7 +57,7 @@ sub weave_section {
     $document->children->push(
         Pod::Elemental::Element::Nested->new({
             command => 'head1',
-            content => 'SOURCE',
+            content => $self->header,
             children => [
                 Pod::Elemental::Element::Pod5::Ordinary->new({content => $text}),
             ],
@@ -112,6 +117,12 @@ in C<weaver.ini>:
 
 This section plugin will produce a hunk of Pod that gives the github URL for
 your module, as well as instructions on how to clone the repository.
+
+=head1 ATTRIBUTES
+
+=head2 header
+
+This allows you to override the default header, "SOURCE".
 
 =head1 METHODS
 

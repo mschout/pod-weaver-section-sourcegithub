@@ -1,5 +1,5 @@
 package Pod::Weaver::Section::SourceGitHub;
-$Pod::Weaver::Section::SourceGitHub::VERSION = '0.57';
+$Pod::Weaver::Section::SourceGitHub::VERSION = '0.58';
 # ABSTRACT: Add SOURCE pod section for a github repository
 
 use Moose;
@@ -24,11 +24,6 @@ has repo_web => (
     is         => 'ro',
     lazy_build => 1);
 
-has header => (
-  is      => 'ro',
-  isa     => 'Str',
-  default => 'SOURCE',
-);
 
 sub weave_section {
     my ($self, $document, $input) = @_;
@@ -57,7 +52,7 @@ sub weave_section {
     $document->children->push(
         Pod::Elemental::Element::Nested->new({
             command => 'head1',
-            content => $self->header,
+            content => 'SOURCE',
             children => [
                 Pod::Elemental::Element::Pod5::Ordinary->new({content => $text}),
             ],
@@ -105,7 +100,7 @@ Pod::Weaver::Section::SourceGitHub - Add SOURCE pod section for a github reposit
 
 =head1 VERSION
 
-version 0.57
+version 0.58
 
 =head1 SYNOPSIS
 
@@ -117,12 +112,6 @@ in C<weaver.ini>:
 
 This section plugin will produce a hunk of Pod that gives the github URL for
 your module, as well as instructions on how to clone the repository.
-
-=head1 ATTRIBUTES
-
-=head2 header
-
-This allows you to override the default header, "SOURCE".
 
 =head1 METHODS
 
@@ -150,7 +139,7 @@ Michael Schout <mschout@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2024 by Michael Schout.
+This software is copyright (c) 2025 by Michael Schout.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

@@ -71,7 +71,10 @@ sub _build_repo_data {
         $url =~ s{^git\@github.com:/*}{github.com/}i;
         $url =~ s/\.git$//i;
 
-        return [ "$url.git", $url ];
+        my $repo_web = $url;       $repo_web  =~ s|^(https://)?|https://|;
+        my $repo_git = "$url.git"; $repo_git  =~ s|^(git://)?|git://|;
+
+        return [ $repo_git, $repo_web ];
     }
 
     return [];

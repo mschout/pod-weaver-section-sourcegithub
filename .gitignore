@@ -1,4 +1,5 @@
 Pod-Weaver-Section-SourceGitHub-*
 \.build
 \.idea
+\.perl-version
 releases/

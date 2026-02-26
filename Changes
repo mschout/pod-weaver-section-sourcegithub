@@ -1,6 +1,8 @@
 Revision history for Pod::Weaver::Section::SourceGitHub
 
 {{$NEXT}}
+
+0.59  2026-02-26
     - Fix handing of repository schemes so that the POD will always have https:// links to github, even if configured with ssh or git scheme.
       (thanks Robert Rothenberg)
 

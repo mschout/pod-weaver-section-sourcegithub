@@ -1,5 +1,5 @@
 package Pod::Weaver::Section::SourceGitHub;
-$Pod::Weaver::Section::SourceGitHub::VERSION = '0.58';
+$Pod::Weaver::Section::SourceGitHub::VERSION = '0.59';
 # ABSTRACT: Add SOURCE pod section for a github repository
 
 use Moose;
@@ -10,19 +10,41 @@ use Moose::Autobox;
 
 has zilla => (
     is  => 'rw',
-    isa => 'Dist::Zilla');
+    isa => 'Dist::Zilla'
+);
 
 has repo_data => (
-    is         => 'ro',
-    lazy_build => 1);
+    is      => 'ro',
+    lazy    => 1,
+    default => sub {
+        my $self = shift;
+
+        my $url = $self->zilla->distmeta->{resources}{repository}{url}
+          or die "No repository URL found in distmeta";
+
+        if ($url =~ /github\.com/i) {
+            $url =~ s{^(?:https?|git):/*}{}i;
+            $url =~ s{^git\@github.com:/*}{github.com/}i;
+            $url =~ s/\.git$//i;
+
+            return [ "https://$url.git", "https://$url" ];
+        }
+
+        return [];
+    }
+);
 
 has repo_git => (
-    is         => 'ro',
-    lazy_build => 1);
+    is      => 'ro',
+    lazy    => 1,
+    default => sub { shift->repo_data->[0] },
+);
 
 has repo_web => (
-    is         => 'ro',
-    lazy_build => 1);
+    is      => 'ro',
+    lazy    => 1,
+    default => sub { shift->repo_data->[1] },
+);
 
 
 sub weave_section {
@@ -37,17 +59,14 @@ sub weave_section {
     # pull repo out of distmeta resources.
     my $repo = $meta->{resources}{repository}{url} or return;
 
-    return unless $repo =~ /github\.com/;
+    return unless $repo =~ /github\.com/i;
 
-    my $clonerepo = $repo;
-
-    # fix up clone repo url
     my $repo_web = $self->repo_web;
     my $repo_git = $self->repo_git;
 
     my $text =
-        "The development version is on github at L<".$self->repo_web.">\n".
-        "and may be cloned from L<".$self->repo_git.">\n";
+        "The development version is on github at L<$repo_web>\n".
+        "and may be cloned from L<$repo_git>\n";
 
     $document->children->push(
         Pod::Elemental::Element::Nested->new({
@@ -58,31 +77,6 @@ sub weave_section {
             ],
         }),
     );
-}
-
-sub _build_repo_data {
-    my $self = shift;
-
-    my $url = $self->zilla->distmeta->{resources}{repository}{url}
-        or die "No repository URL found in distmeta";
-
-    if ($url =~ /github\.com/i) {
-        $url =~ s{^(?:http|git):/*}{}i;
-        $url =~ s{^git\@github.com:/*}{github.com/}i;
-        $url =~ s/\.git$//i;
-
-        return [ "$url.git", $url ];
-    }
-
-    return [];
-}
-
-sub _build_repo_git {
-    shift->repo_data->[0];
-}
-
-sub _build_repo_web {
-    shift->repo_data->[1];
 }
 
 no Moose;
@@ -100,7 +94,7 @@ Pod::Weaver::Section::SourceGitHub - Add SOURCE pod section for a github reposit
 
 =head1 VERSION
 
-version 0.58
+version 0.59
 
 =head1 SYNOPSIS
 
@@ -139,7 +133,7 @@ Michael Schout <mschout@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2025 by Michael Schout.
+This software is copyright (c) 2026 by Michael Schout.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
